@@ -12,8 +12,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (<div><button onClick={ () => this.setState( { count: this.state.count -1 } ) } > - </button>
-            <button onClick={ () => this.setState( { count: this.state.count +1 } ) } > + </button><div>{this.state.count}</div></div>)
+    return (<div className='container p-3'><button onClick={ () => this.setState( { count: this.state.count -1 } ) } className="btn btn-danger m-2"> - </button>
+            <button onClick={ () => this.setState( { count: this.state.count +1 } ) } className="btn btn-success m-2" > + </button>
+            <div className='m-2'><b>{this.state.count}</b></div>
+            </div>)
   }
 }
 
