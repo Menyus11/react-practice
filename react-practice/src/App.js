@@ -1,22 +1,31 @@
-import React from 'react';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
-export default class App extends React.Component {
+export default function App() {
 
-  constructor(props) {
-    super( props )
-  }
+  const [list, setList] = useState( [] )
 
-  state = {
-    count: 0
-  }
+  useEffect( () => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then( (res) => {
+      return res.json();
+    })
+    .then( (res) => {
+    setList( res );
+    })
+  }, []);
 
-  render() {
-    return (<div className='container p-3'><button onClick={ () => this.setState( { count: this.state.count -1 } ) } className="btn btn-danger m-2"> - </button>
-            <button onClick={ () => this.setState( { count: this.state.count +1 } ) } className="btn btn-success m-2" > + </button>
-            <div className='m-2'><b>{this.state.count}</b></div>
-            </div>)
-  }
+
+
+  return (
+    <div className='container'>
+      { list.map( (item, index) => {
+        return <React.Fragment key={index}>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+          <hr />
+        </React.Fragment>
+      })}
+    </div>
+  )
+
 }
-
-
